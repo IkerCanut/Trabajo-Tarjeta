@@ -8,8 +8,7 @@ class BoletoTest extends TestCase {
 	 * Testeamos que el valor de los boletos sea el acorde con respecto a la tarjeta que se le pase como parametro
 	 */
 	public function testSaldo() {
-		$this->assertTrue(TRUE);
-		/*$valor = 14.80;
+		$valor = 14.80;
 
 		$colectivo = new Colectivo( null, null, null );
 
@@ -26,7 +25,7 @@ class BoletoTest extends TestCase {
 
 		$this->assertEquals( $valor, $boleto->obtenerValor() );
 		$this->assertEquals( $valor / 2, $boletoMedio->obtenerValor() );
-		$this->assertEquals( 0.0, $boletoCompleto->obtenerValor() );*/
+		$this->assertEquals( 0.0, $boletoCompleto->obtenerValor() );
 	}
 
 	public function testTransbordo() {

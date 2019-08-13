@@ -3,58 +3,59 @@
 namespace TrabajoTarjeta;
 
 class Colectivo implements ColectivoInterface {
+    protected $linea;
+    protected $empresa;
+    protected $numero;
+    protected $tiempo;
 
-	private $linea;
-	private $empresa;
-	private $numero;
+    public function __construct($linea, $empresa, $numero, $tiempo) {
+        $this->linea = $linea;
+        $this->empresa = $empresa;
+        $this->numero = $numero;
+        $this->tiempo = $tiempo;
+    }
 
-	public function __construct( $linea, $empresa, $numero ) {
-		$this->linea = $linea;
-		$this->empresa = $empresa;
-		$this->numero = $numero;
-	}
+    public function linea() {
+        return $this->linea;
+    }
 
-	/**
-	 * Devuelve el nombre de la linea. Ejemplo '142 Negro'
-	 *
-	 * @return string
-	 */
-	public function linea() {
-		return $this->linea;
-	}
+    public function empresa() {
+        return $this->empresa;
+    }
 
-	/**
-	 * Devuelve el nombre de la empresa. Ejemplo 'Semtur'
-	 *
-	 * @return string
-	 */
-	public function empresa() {
-		return $this->empresa;
-	}
+    public function numero() {
+        return $this->numero;
+    }
 
-	/**
-	 * Devuelve el numero de unidad. Ejemplo: 12
-	 *
-	 * @return int
-	 */
-	public function numero() {
-		return $this->numero;
-	}
+    public function tiempo() {
+        return $this->tiempo->time();
+    }
 
-	/**
-	 * Paga un viaje en el colectivo con una tarjeta en particular.
-	 *
-	 * @param TarjetaInterface $tarjeta
-	 *
-	 * @return BoletoInterface|FALSE
-	 *  El boleto generado por el pago del viaje. O FALSE si no hay saldo
-	 *  suficiente en la tarjeta.
-	 */
-	public function pagarCon( TarjetaInterface $tarjeta, int $tiempo ) {
-		$transaccion = $tarjeta->generarPago( $tiempo, $this );
-
-		if ( $transaccion->FALLO ) return false;
-
-		return new Boleto( $this, $tarjeta, $tiempo, $transaccion );
-	}
+    public function pagarCon(TarjetaInterface $tarjeta) {
+        switch ($tarjeta->puedePagar($this->linea, $this->empresa, $this->numero)) {
+            case "normal":
+                return new Boleto($tarjeta->precio, $this, $tarjeta, $this->tiempo->time(), "normal");
+                break;
+            case "usa plus":
+                return new Boleto(0, $this, $tarjeta, $this->tiempo->time(), "usa plus");
+                break;
+            case "paga un plus":
+                return new Boleto($tarjeta->precio, $this, $tarjeta, $this->tiempo->time(), "un plus");
+                break;
+            case "paga dos plus":
+                return new Boleto($tarjeta->precio, $this, $tarjeta, $this->tiempo->time(), "dos plus");
+                break;
+            case "transbordo normal":
+                return new Boleto(($tarjeta->precio)/3, $this, $tarjeta, $this->tiempo->time(), "transbordo");
+                break;
+            case "transbordo y paga un plus":
+                return new Boleto(($tarjeta->precio)/3, $this, $tarjeta, $this->tiempo->time(), "transbordo y un plus");
+                break;
+            case "transbordo y paga dos plus":
+                return new Boleto(($tarjeta->precio)/3, $this, $tarjeta, $this->tiempo->time(), "transbordo y dos plus");
+                break;
+            default:
+                return false;
+        }
+    }
 }

@@ -3,172 +3,203 @@
 namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
-	protected $saldo = 0;
-	protected $boletosPlusUsados = 0;
-	protected $ultTiempo = -TiempoAyudante::CINCO_MINUTOS - 1;
-	protected $transbordo;
-	protected $linea = '';
-	protected $bandera = '';
+  protected $saldo;
+  
+  //Que la variable plus comience desde 0 se refiere a que todavia no se ha usado ningun viaje plus
+  protected $plus = 0;
 
-	public function __construct() {
-		$this->transbordo = 0;
-	}
+  public $precio = 14.80;
 
-	public function estransbordo( $montotiempo, $lineacole, $banderacole ) {
-		if ( $lineacole != $this->linea || $banderacole != $this->bandera ) {
+  public $tiempo;
 
-			$this->linea = $lineacole;
-			$this->bandera = $banderacole;
+  public $anteriorTiempo = null;
 
-			if ( $this->transbordo == 0 ) {
-				$this->transbordo = $montotiempo;
-				return false;
-			}
+  public $anteriorColectivo = null;
 
-			$tiempoayuda = new TiempoAyudante();
-			$tiempopago = $montotiempo;
-			$tolerancia = $this->transbordo;
+  public $actualColectivo;
 
-			$horapago1 = $tiempoayuda->saber_hora( $this->transbordo );
-			$horapago2 = $tiempoayuda->saber_hora( $tiempopago );
+  public function __construct($tiempo, $saldo = 0) {
+    $this->tiempo = $tiempo;
+    $this->saldo = $saldo;
+  }
 
-			$diapago1 = $tiempoayuda->saber_dia( $this->transbordo );//necesitaria un dia pago prima de formato 2018-09-19 por ejemplo
-			$diapagoferiado = $tiempoayuda->saber_dia_md( $this->transbordo );
-			$diapago1prima = $tiempoayuda->saber_dia_ymd( $this->transbordo );
+  public function recargar($monto) {
+    //Chequea si es alguno de los valores aceptados que no cargan dinero extra
+    if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100) {
+      $this->saldo += $monto;
+      if ($this->plus == 1 && $this->saldo >= $this->precio) {
+        $this->saldo -= $this->precio;
+        $this->plus = 0;
+      }
+      if ($this->plus == 2) {
+        if ($this->saldo >= $this->precio && $this->saldo < $this->precio * 2) {
+          $this->saldo -= $this->precio;
+          $this->plus = 1;
+        }
+        if ($this->saldo >= $this->precio * 2) {
+          $this->saldo -= $this->precio;
+          $this->plus = 0;
+        }
+      }
+      return true;
+    }
+    //Chequea si es alguno de los que sí cargan extra
+    if ($monto == 510.15) {
+      $this->saldo += $monto + 81.93 - ($this->plus * $this->precio);
+      $this->plus = 0;
+      return true;
+    }
+    if ($monto == 962.59) {
+      $this->saldo += $monto + 221.58 - ($this->plus * $this->precio);
+      $this->plus = 0;
+      return true;
+    }
+    //Si no es ninguno de esos valores entonces no es un valor aceptado y hay que retornar false
+    return false;
+  }
 
-			$diapago2prima = $tiempoayuda->saber_dia_ymd( $tiempopago );
-			$diapago2 = $tiempoayuda->saber_dia( $tiempopago );
-
-			if ( $horapago1 > "22:00:00" || $horapago1 < "06:00:00" ) {
-
-				$tolerancia += (90 * 60);
-				$tolerancia = $tiempoayuda->saber_hora( $tolerancia );
-				$this->transbordo = 0;
-				return $this->verificar( $horapago2, $tolerancia );
-			}
-
-			if ( $diapago1 == "Lunes" || $diapago1 == "Martes" || $diapago1 == "Miercoles" || $diapago1 == "Jueves" || $diapago1 == "Viernes" ) {
-				if ( $horapago1 >= "06:00:00" && $horapago1 <= "22:00:00" && $diapago1 == $diapago2 && $diapago1prima == $diapago2prima ) {
-					$tolerancia += (60 * 60);
-					$tolerancia = $tiempoayuda->saber_hora( $tolerancia );
-					$this->transbordo = 0;
-					return $this->verificar( $horapago2, $tolerancia );
-				}
-			}
-
-			if ( $diapago1 == "Sabado" ) {
-				if ( $horapago1 >= "06:00:00" && $horapago1 <= "14:00:00" && $diapago1 == $diapago2 && $diapago1prima == $diapago2prima ) {
-					$tolerancia += 60 * 60;
-					$tolerancia = $tiempoayuda->saber_hora( $tolerancia );
-					$this->transbordo = 0;
-					return $this->verificar( $horapago2, $tolerancia );
-				}
-				if ( $horapago1 > "14:00:00" && $horapago1 <= "22:00:00" && $diapago1 == $diapago2 && $diapago1prima == $diapago2prima ) {
-					$tolerancia += 90 * 60;
-					$tolerancia = $tiempoayuda->saber_hora( $tolerancia );
-					$this->transbordo = 0;
-					return $this->verificar( $horapago2, $tolerancia );
-				}
-			}
-
-			if ( $diapago1 == "Domingo" || in_array( $diapagoferiado, $constantes->diasferiados ) ) {
-				if ( $horapago1 >= "06:00:00" && $horapago1 <= "22:00:00" && $diapago1 == $diapago2 && $diapago1prima == $diapago2prima ) {
-					$tolerancia += 90 * 60;
-					$tolerancia = $tiempoayuda->saber_hora( $tolerancia );
-					$this->transbordo = 0;
-					return $this->verificar( $horapago2, $tolerancia );
-				}
-			}
-		} else {
-			return false;
-		}
-	}
+  public function obtenerSaldo() {
+    return $this->saldo;
+  }
 
 
-	public function verificar( $horapago2, $tolerancia ) {
-		if ( $horapago2 <= $tolerancia ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+  public function bajarSaldo($montito) {
+    $this->saldo -= $montito;
+  }
 
+  public function obtenerPlus() {
+    return $this->plus;
+  }
 
-	public function recargar( $monto, int $tiempo ) {
+  public function aumentarPlus() {
+    $this->plus ++;
+  }
 
-		if ( !$constantes->VALORES_CARGABLES->contains( (float)$monto ) ) return false;
-		$this->saldo += valorCargado( (float)$monto );
-		return true;
-	}
+  public function puedePagar($linea, $empresa, $numero) {
+    $this->actualColectivo = array($linea, $empresa, $numero);
+    if ($this->obtenerSaldo() >= $this->precio) {
+      switch ($this->obtenerPlus()) {
+        case 0:
+          if ($this->trasbordoPermitido($this->actualColectivo)) {
+            $this->bajarSaldo($this->precio / 3);
+            return "transbordo normal";
+          }
+          else {
+            $this->bajarSaldo($this->precio);
+            return "normal";
+          }
+          break;
+        case 1:
+          if ($this->trasbordoPermitido($this->actualColectivo)) {
+            if ($this->obtenerSaldo() >= $this->precio * 4/3) {
+              $this->bajarSaldo($this->precio / 3);
+              $this->bajarSaldo($this->precio);
+              $this->plus--;
+              return "transbordo y paga un plus";
+            } else {
+              $this->bajarSaldo($this->precio / 3);
+              return "transbordo normal";
+            }
+          }
+          if ($this->obtenerSaldo() >= $this->precio * 2) {
+            $this->bajarSaldo($this->precio);
+            $this->bajarSaldo($this->precio);
+            $this->plus--;
+            return "paga un plus";
+          } else {
+            $this->bajarSaldo($this->precio);
+            return "normal";
+          }
+          break;
+        case 2:
+          if ($this->trasbordoPermitido($this->actualColectivo)) {
+            if ($this->obtenerSaldo() >= $this->precio * 7/3) {
+              $this->bajarSaldo($this->precio);
+              $this->bajarSaldo($this->precio);
+              $this->bajarSaldo($this->precio / 3);
+              $this->plus-=2;
+              return "transbordo y paga dos plus";
+            } else if ($this->obtenerSaldo() >= $this->precio * 4/3) {
+              $this->bajarSaldo($this->precio);
+              $this->bajarSaldo($this->precio / 3);
+              $this->plus--;
+              return "transbordo y paga un plus";
+            } else {
+              $this->bajarSaldo($this->precio / 3);
+              return "transbordo normal";
+            }
+          }
+          if ($this->obtenerSaldo() >= $this->precio * 3) {
+            $this->bajarSaldo($this->precio);
+            $this->bajarSaldo($this->precio);
+            $this->bajarSaldo($this->precio);
+            $this->plus-=2;
+            return "paga dos plus";
+          } else if ($this->obtenerSaldo() >= $this->precio * 2) {
+            $this->bajarSaldo($this->precio);
+            $this->bajarSaldo($this->precio);
+            $this->plus--;
+            return "paga un plus";
+          } else {
+            $this->bajarSaldo($this->precio);
+            return "normal";
+          }
+      }
+    }
+    else {
+      if ($this->trasbordoPermitido($this->actualColectivo)) {
+        if ($this->obtenerSaldo()>=(($this->precio)/3)) {
+          return "transbordo normal";
+        }
+      }
+      if ($this->obtenerPlus() != 2) {
+        $this->aumentarPlus();
+          return "usa plus";
+      }
+    }
+    return "no";
+  }
 
-	public function obtenerSaldo(): float {
-		return $this->saldo;
-	}
+  public function trasbordoPermitido($colectivo) {
+    $actual = $this->tiempo->time();
+    $diferencia = (($actual) - ($this->anteriorTiempo));
+    // La diferencia que devuelve está en minutos, por eso multiplico por 60
+    if ($diferencia < ($this->diferenciaNecesaria($actual) * 60) && (($this->anteriorTiempo) !== null) && $colectivo !== $this->anteriorColectivo && $this->anteriorColectivo !== null) {
+      $this->anteriorTiempo = $actual;
+      $this->anteriorColectivo = $colectivo;
+      return true;
+    }
+    $this->anteriorTiempo = $actual;
+    $this->anteriorColectivo = $colectivo;
+    return false;
+  }
 
-	public function generarPago( int $tiempo, ColectivoInterface $colectivo ): Pago {
-		$pago = $this->manejarPago( $tiempo, $colectivo );
+  public function diferenciaNecesaria($tiempo) {
+    $dia = date("D",$tiempo);
+    $hora = date("H", $tiempo);
+    if ($hora>=22 || $hora<=6) { // Si es de noche hay mas tiempo
+      return 90;
+    } else {
+      if ($dia == "Sat") { // Si es sabado depende si es de mañana o tarde
+        if ($hora<14 && !($this->esFeriado())) { // Aunque tambien puede ser feriado un sabado y entonces hay mas tiempo a la mañana tambien
+          return 60;
+        } else {
+          return 90;
+        }
+      }
+      if ($dia == "Sun") { // Los domingos tambien hay mas tiempo
+        return 90;
+      }
+      //if($this->esFeriado()) // Y los otros días depende si es feriado
+      //  return 90;
+      //else
+      //  return 60;
+      return 60; // Por ahora no manejamos los feriados
+    }
+  }
 
-		if ( !$pago->FALLO ) {
-			$this->alFinalizarPago( $tiempo );
-		}
+  public function esFeriado() {
+    return false;
+  }
 
-		return $pago;
-	}
-
-	protected function alFinalizarPago( int $tiempo ) {
-		$this->ultTiempo = $tiempo;
-	}
-
-	private function manejarPago( int $tiempo, ColectivoInterface $colectivo ): Pago {
-
-		if ( $this->getPrecio( $tiempo, $colectivo )->NO_SE_PUEDE ) {
-			return Pago::newFallado();
-		}
-
-		if ( $this->getPrecio( $tiempo, $colectivo )->PRECIO == 0 ) {
-			return new Pago( false, $this->getPrecio( $tiempo, $colectivo ), false );
-		}
-
-		if ( $this->obtenerSaldo() - $this->getPrecio( $tiempo, $colectivo )->PRECIO < 0 ) {
-			if ( $this->boletosPlusUsados >= $constantes->MAX_PLUS ) return Pago::newFallado();
-
-			$this->boletosPlusUsados++;
-			return new Pago( false, $this->getPrecio( $tiempo, $colectivo ), true );
-		}
-
-		$extra = [];
-
-		if ( $this->boletosPlusUsados > 0 ) {
-			$boletosPlusAPagar = ($this->boletosPlusUsados) * $this->getPrecio( $tiempo, $colectivo )->PRECIO;
-
-			if ( $this->estransbordo( $tiempo, $colectivo->linea(), $colectivo->numero() ) ) {
-				$extra[] = "Transbordo";
-			}
-
-			if ( $this->saldo - $boletosPlusAPagar + $this->getPrecio( $tiempo, $colectivo )->PRECIO < 0 ) {
-				return Pago::newFallado();
-			}
-
-			$this->saldo -= $boletosPlusAPagar;
-			$this->boletosPlusUsados = 0;
-
-			$extra[] = "Abona viajes plus $" . ($boletosPlusAPagar);
-		}
-
-		$this->saldo -= $this->getPrecio( $tiempo, $colectivo )->PRECIO;
-		return new Pago( false, $this->getPrecio( $tiempo, $colectivo ), false, $extra );
-	}
-
-	public function getPrecio( int $tiempo, ColectivoInterface $colectivo ): Precio {
-
-		if ( $this->estransbordo( $tiempo, $colectivo->linea(), $colectivo->numero() ) ) {
-			return new Precio( false, $constantes->PRECIO_VIAJE * $constantes->PRECIO_RELATIVO_TRANSBORDO, TipoDeBoleto::Trans );
-		}
-
-		return new Precio( false, $constantes->PRECIO_VIAJE, TipoDeBoleto::Normal );
-	}
-
-	protected function getUltTiempo(): int {
-		return $this->ultTiempo;
-	}
 }

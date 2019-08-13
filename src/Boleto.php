@@ -4,60 +4,58 @@ namespace TrabajoTarjeta;
 
 class Boleto implements BoletoInterface {
 
-	private $colectivo;
-	private $tarjeta;
-	private $pago;
-	private $tiempo;
-	private $saldo;
+    protected $valor;
 
-	public function __construct( ColectivoInterface $colectivo, TarjetaInterface $tarjeta, int $tiempo,
-								 Pago $pago ) {
-		$this->pago = $pago;
-		$this->colectivo = $colectivo;
-		$this->tarjeta = $tarjeta;
-		$this->tiempo = $tiempo;
-		$this->saldo = $this->tarjeta->obtenerSaldo();
-	}
+    protected $colectivo;
 
-	/**
-	 * Devuelve el valor del boleto.
-	 *
-	 * @return int
-	 */
-	public function obtenerValor() {
-		return $this->pago->PRECIO->PRECIO;
-	}
+    protected $tarjeta;
 
-	/**
-	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
-	 *
-	 * @return ColectivoInterface
-	 */
-	public function obtenerColectivo() {
-		return $this->colectivo;
-	}
+    protected $fecha;
 
-	public function obtenerTarjeta(): TarjetaInterface {
-		return $this->tarjeta;
-	}
+    protected $descripcion;
 
-	public function obtenerFechaYHora(): int {
-		return $this->tiempo;
-	}
+    public function __construct($valor, $colectivo, $tarjeta, $fecha, $tipoPago) {
+        $this->valor = $valor;
+        $this->colectivo = $colectivo;
+        $this->tarjeta = $tarjeta;
+        $this->fecha = $fecha;
+        switch ($tipoPago) {
+            case "un plus":
+                $this->descripcion = "Abona viaje plus ".$valor." y";
+                break;
+            case "dos plus":
+                $this->descripcion = "Abona viajes plus ".($valor*2)." y";
+                break;
+            case "transbordo y un plus":
+                $this->descripcion = "Abona viaje plus ".($valor*3)." y";
+                break;
+            case "transbordo y dos plus":
+                $this->descripcion = "Abona viajes plus ".($valor*6)." y";
+                break;
+        }
+    }
 
-	public function obtenerTipoDeBoleto(): string {
-		return $this->pago->TIPO_BOLETO;
-	}
+    public function obtenerDescripcion() {
+        return $this->descripcion;
+    }
 
-	public function obtenerSaldo(): float {
-		return $this->saldo;
-	}
+    public function obtenerValor() {
+        return $this->valor;
+    }
 
-	public function esViajePlus(): bool {
-		return $this->pago->ES_PLUS;
-	}
+    public function obtenerTarjeta() {
+        return $this->tarjeta;
+    }
 
-	public function extras(): array {
-		return $this->pago->EXTRAS;
-	}
+    public function obtenerFecha() {
+        return $this->fecha;
+    }
+
+    public function obtenerTipoTarjeta() {
+        return get_class($this->tarjeta);
+    }
+
+    public function obtenerColectivo() {
+        return $this->colectivo;
+    }
 }

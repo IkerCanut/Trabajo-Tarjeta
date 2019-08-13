@@ -4,7 +4,7 @@ namespace TrabajoTarjeta;
 
 use Ds\Set;
 
-global $DIASFERIADOS;
+//global $DIASFERIADOS;
 $DIASFERIADOS = array(
 	'01-01',
 	'02-12',
@@ -26,15 +26,15 @@ $DIASFERIADOS = array(
 	'12-25',
 	'12-31'
 );
-global $MAX_PLUS;
+//global $MAX_PLUS;
 $MAX_PLUS = 2;
-global $PRECIO_VIAJE;
+//global $PRECIO_VIAJE;
 $PRECIO_VIAJE = 14.80;
-global $PRECIO_MEDIO_BOLETO;
+//global $PRECIO_MEDIO_BOLETO;
 $PRECIO_MEDIO_BOLETO = $PRECIO_VIAJE/2;
-global $PRECIO_RELATIVO_TRANSBORDO;
+//global $PRECIO_RELATIVO_TRANSBORDO;
 $PRECIO_RELATIVO_TRANSBORDO = 0.33;
-global $VALORES_CARGABLES;
+//global $VALORES_CARGABLES;
 $VALORES_CARGABLES = new Set( [
 	10.,
 	20.,
@@ -44,7 +44,7 @@ $VALORES_CARGABLES = new Set( [
 	510.15,
 	962.59
 ] );
-global $VALORES_ADICIONADOS;
+//global $VALORES_ADICIONADOS;
 $VALORES_ADICIONADOS = new Set( [
 	510.15,
 	962.59

@@ -3,19 +3,19 @@
 namespace TrabajoTarjeta;
 use PHPUnit\Framework\TestCase;
 
-use ..\src\BoletoInterface.php;
-use ..\src\FranquiciaCompleta.php;
-use ..\src\TarjetaInterface.php;
-use ..\src\Boleto.php;
-use ..\src\FranquiciaMedio.php;
-use ..\src\Tarjeta.php;
-use ..\src\ColectivoInterface.php;
-use ..\src\Pago.php;
-use ..\src\TiempoAyudante.php;
-use ..\src\Colectivo.php;
-use ..\src\TipoDeBoleto.php;
-use ..\src\Constantes.php;
-use ..\src\Precio.php;
+require "..\src\BoletoInterface.php";
+require "..\src\FranquiciaCompleta.php";
+require "..\src\TarjetaInterface.php";
+require "..\src\Boleto.php";
+require "..\src\FranquiciaMedio.php";
+require "..\src\Tarjeta.php";
+require "..\src\ColectivoInterface.php";
+require "..\src\Pago.php";
+require "..\src\TiempoAyudante.php";
+require "..\src\Colectivo.php";
+require "..\src\TipoDeBoleto.php";
+require "..\src\Constantes.php";
+require "..\src\Precio.php";
 
 class BoletoTest extends TestCase {
 	/**

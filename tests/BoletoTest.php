@@ -3,20 +3,6 @@
 namespace TrabajoTarjeta;
 use PHPUnit\Framework\TestCase;
 
-require "..\src\BoletoInterface.php";
-require "..\src\FranquiciaCompleta.php";
-require "..\src\TarjetaInterface.php";
-require "..\src\Boleto.php";
-require "..\src\FranquiciaMedio.php";
-require "..\src\Tarjeta.php";
-require "..\src\ColectivoInterface.php";
-require "..\src\Pago.php";
-require "..\src\TiempoAyudante.php";
-require "..\src\Colectivo.php";
-require "..\src\TipoDeBoleto.php";
-require "..\src\Constantes.php";
-require "..\src\Precio.php";
-
 class BoletoTest extends TestCase {
 	/**
 	 * Testeamos que el valor de los boletos sea el acorde con respecto a la tarjeta que se le pase como parametro

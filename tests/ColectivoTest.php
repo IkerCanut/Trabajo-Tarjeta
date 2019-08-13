@@ -28,8 +28,6 @@ class ColectivoTest extends TestCase {
 	 */
 
 	public function testPagarcon() {
-		global $PRECIO_VIAJE;
-		global $PRECIO_MEDIO_BOLETO;
 
 		$valorsaldo = 50.;
 
@@ -46,7 +44,7 @@ class ColectivoTest extends TestCase {
 
 		$this->assertEquals( $colectivo, $boleto->obtenerColectivo() );
 		$this->assertEquals( $tarjeta->obtenerSaldo(), $boleto->obtenerSaldo() );
-		$this->assertEquals( $PRECIO_VIAJE, $boleto->obtenerValor() );
+		$this->assertEquals( $constantes->PRECIO_VIAJE, $boleto->obtenerValor() );
 		$this->assertEquals( 0, $boleto->obtenerFechaYHora() );
 		$this->assertEquals( $tarjeta, $boleto->obtenerTarjeta() );
 		$this->assertEquals( false, $boleto->esViajePlus() );
@@ -59,7 +57,7 @@ class ColectivoTest extends TestCase {
 
 		$this->assertEquals( $colectivo, $boletoMedio->obtenerColectivo() );
 		$this->assertEquals( $tarjetaMedio->obtenerSaldo(), $boletoMedio->obtenerSaldo() );
-		$this->assertEquals( $PRECIO_MEDIO_BOLETO, $boletoMedio->obtenerValor() );
+		$this->assertEquals( $constantes->PRECIO_MEDIO_BOLETO, $boletoMedio->obtenerValor() );
 		$this->assertEquals( 0, $boletoMedio->obtenerFechaYHora() );
 		$this->assertEquals( $tarjetaMedio, $boletoMedio->obtenerTarjeta() );
 		$this->assertEquals( false, $boletoMedio->esViajePlus() );
@@ -80,7 +78,6 @@ class ColectivoTest extends TestCase {
 	}
 
 	public function testPagarsin() {
-		global $MAX_PLUS;
 
 		$linea = '107 Fonavi';
 		$empresa = 'Rosario Bus';
@@ -89,10 +86,10 @@ class ColectivoTest extends TestCase {
 		$colectivo = new Colectivo( $linea, $empresa, $numero );
 
 		$tarjeta = new Tarjeta;
-		for ( $i = 0; $i <= $MAX_PLUS; $i++ ) $tarjeta->generarPago( 0, $colectivo );
+		for ( $i = 0; $i <= $constantes->MAX_PLUS; $i++ ) $tarjeta->generarPago( 0, $colectivo );
 
 		$tarjetaMedio = new FranquiciaMedio;
-		for ( $i = 0; $i <= $MAX_PLUS; $i++ ) $tarjetaMedio->generarPago( 0, $colectivo );
+		for ( $i = 0; $i <= $constantes->MAX_PLUS; $i++ ) $tarjetaMedio->generarPago( 0, $colectivo );
 
 		$tarjetaCompleta = new FranquiciaCompleta;
 

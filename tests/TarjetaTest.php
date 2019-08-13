@@ -67,7 +67,6 @@ class TarjetaTest extends TestCase {
 	 * Comprueba que la tarjeta puede pagar pluses
 	 */
 	public function testPlus() {
-		global $MAX_PLUS;
 
 		$tarjeta = new Tarjeta;
 		$tarjetaMedio = new FranquiciaMedio;
@@ -76,7 +75,7 @@ class TarjetaTest extends TestCase {
 
 		$tiempo = 0;
 
-		for ( $i = 0; $i < $MAX_PLUS; $i++ ) {
+		for ( $i = 0; $i < $constantes->MAX_PLUS; $i++ ) {
 			$this->assertFalse( $tarjeta->generarPago( $tiempo, $colectivo )->FALLO );
 			$this->assertFalse( $tarjetaMedio->generarPago( $tiempo, $colectivo )->FALLO );
 
@@ -104,34 +103,31 @@ class TarjetaTest extends TestCase {
 	}
 
 	public function testFranquiciaDosAlDia() {
-		global $PRECIO_VIAJE;
-		global $PRECIO_MEDIO_BOLETO;
 
 		$tarjetaMedio = new FranquiciaMedio();
 		$colectivo = new Colectivo( null, null, null );
 
 		$tarjetaMedio->recargar( 100, 0 );
 
-		$this->assertEquals( $PRECIO_MEDIO_BOLETO,
+		$this->assertEquals( $constantes->PRECIO_MEDIO_BOLETO,
 			$tarjetaMedio->generarPago( 0, $colectivo )->PRECIO->PRECIO );
 
-		$this->assertEquals( $PRECIO_MEDIO_BOLETO,
+		$this->assertEquals( $constantes->PRECIO_MEDIO_BOLETO,
 			$tarjetaMedio->generarPago( TiempoAyudante::CINCO_MINUTOS, $colectivo )->PRECIO->PRECIO );
 
-		$this->assertEquals( $PRECIO_VIAJE,
+		$this->assertEquals( $constantes->PRECIO_VIAJE,
 			$tarjetaMedio->generarPago( TiempoAyudante::CINCO_MINUTOS * 2, $colectivo )->PRECIO->PRECIO );
 
-		$this->assertEquals( $PRECIO_MEDIO_BOLETO,
+		$this->assertEquals( $constantes->PRECIO_MEDIO_BOLETO,
 			$tarjetaMedio->generarPago( TiempoAyudante::UN_DIA * 2, $colectivo )->PRECIO->PRECIO );
 	}
 
 	public function testFranquiciaCompleta() {
-		global $MAX_PLUS;
 
 		$tarjetaCompleto = new FranquiciaCompleta;
 		$colectivo = new Colectivo( null, null, null );
 
-		for ( $i = 0; $i <= $MAX_PLUS; $i++ ) {
+		for ( $i = 0; $i <= $constantes->MAX_PLUS; $i++ ) {
 			$this->assertFalse( $tarjetaCompleto->generarPago( 0, $colectivo )->FALLO );
 		}
 

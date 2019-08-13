@@ -15,8 +15,6 @@ class Tarjeta implements TarjetaInterface {
 	}
 
 	public function estransbordo( $montotiempo, $lineacole, $banderacole ) {
-		global $DIASFERIADOS;
-		$diasferiados = $DIASFERIADOS;
 		if ( $lineacole != $this->linea || $banderacole != $this->bandera ) {
 
 			$this->linea = $lineacole;
@@ -73,7 +71,7 @@ class Tarjeta implements TarjetaInterface {
 				}
 			}
 
-			if ( $diapago1 == "Domingo" || in_array( $diapagoferiado, $diasferiados ) ) {
+			if ( $diapago1 == "Domingo" || in_array( $diapagoferiado, $constantes->diasferiados ) ) {
 				if ( $horapago1 >= "06:00:00" && $horapago1 <= "22:00:00" && $diapago1 == $diapago2 && $diapago1prima == $diapago2prima ) {
 					$tolerancia += 90 * 60;
 					$tolerancia = $tiempoayuda->saber_hora( $tolerancia );
@@ -97,9 +95,8 @@ class Tarjeta implements TarjetaInterface {
 
 
 	public function recargar( $monto, int $tiempo ) {
-		global $VALORES_CARGABLES;
 
-		if ( !$VALORES_CARGABLES->contains( (float)$monto ) ) return false;
+		if ( !$constantes->VALORES_CARGABLES->contains( (float)$monto ) ) return false;
 		$this->saldo += valorCargado( (float)$monto );
 		return true;
 	}
@@ -123,7 +120,6 @@ class Tarjeta implements TarjetaInterface {
 	}
 
 	private function manejarPago( int $tiempo, ColectivoInterface $colectivo ): Pago {
-		global $MAX_PLUS;
 
 		if ( $this->getPrecio( $tiempo, $colectivo )->NO_SE_PUEDE ) {
 			return Pago::newFallado();
@@ -134,7 +130,7 @@ class Tarjeta implements TarjetaInterface {
 		}
 
 		if ( $this->obtenerSaldo() - $this->getPrecio( $tiempo, $colectivo )->PRECIO < 0 ) {
-			if ( $this->boletosPlusUsados >= $MAX_PLUS ) return Pago::newFallado();
+			if ( $this->boletosPlusUsados >= $constantes->MAX_PLUS ) return Pago::newFallado();
 
 			$this->boletosPlusUsados++;
 			return new Pago( false, $this->getPrecio( $tiempo, $colectivo ), true );
@@ -164,14 +160,12 @@ class Tarjeta implements TarjetaInterface {
 	}
 
 	public function getPrecio( int $tiempo, ColectivoInterface $colectivo ): Precio {
-		global $PRECIO_VIAJE;
-		global $PRECIO_RELATIVO_TRANSBORDO;
 
 		if ( $this->estransbordo( $tiempo, $colectivo->linea(), $colectivo->numero() ) ) {
-			return new Precio( false, $PRECIO_VIAJE * $PRECIO_RELATIVO_TRANSBORDO, TipoDeBoleto::Trans );
+			return new Precio( false, $constantes->PRECIO_VIAJE * $constantes->PRECIO_RELATIVO_TRANSBORDO, TipoDeBoleto::Trans );
 		}
 
-		return new Precio( false, $PRECIO_VIAJE, TipoDeBoleto::Normal );
+		return new Precio( false, $constantes->PRECIO_VIAJE, TipoDeBoleto::Normal );
 	}
 
 	protected function getUltTiempo(): int {

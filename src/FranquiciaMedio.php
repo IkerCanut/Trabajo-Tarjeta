@@ -7,8 +7,6 @@ class FranquiciaMedio extends Tarjeta {
 	private $pagosHoy = 0;
 
 	public function getPrecio( int $tiempo, ColectivoInterface $colectivo ): Precio {
-		global $PRECIO_MEDIO_BOLETO;
-		global $PRECIO_RELATIVO_TRANSBORDO;
 
 		if ( $this->pagosHoy >= 2 && TiempoAyudante::pertenecenAlMismoDia( $this->getUltTiempo(), $tiempo ) ) {
 			return parent::getPrecio( $tiempo, $colectivo );
@@ -17,10 +15,10 @@ class FranquiciaMedio extends Tarjeta {
 		$noSePuede = $tiempo - $this->getUltTiempo() < TiempoAyudante::CINCO_MINUTOS;
 
 		if ( $this->estransbordo( $tiempo, $colectivo->linea(), $colectivo->numero() ) ) {
-			return new Precio( $noSePuede, $PRECIO_MEDIO_BOLETO * $PRECIO_RELATIVO_TRANSBORDO, TipoDeBoleto::Trans );
+			return new Precio( $noSePuede, $constantes->PRECIO_MEDIO_BOLETO * $constantes->PRECIO_RELATIVO_TRANSBORDO, TipoDeBoleto::Trans );
 		}
 
-		return new Precio( $noSePuede, $PRECIO_MEDIO_BOLETO, TipoDeBoleto::Medio );
+		return new Precio( $noSePuede, $constantes->PRECIO_MEDIO_BOLETO, TipoDeBoleto::Medio );
 	}
 
 	protected function alFinalizarPago( int $tiempo ) {

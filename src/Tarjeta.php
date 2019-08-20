@@ -26,7 +26,7 @@ class Tarjeta implements TarjetaInterface {
   }
 
   public function recargar($monto) {
-    foreach ($tupla in $valoresCargables) {
+    foreach ($tupla as $valoresCargables) {
       if ($monto == $tupla[0]) {
       
         $this->saldo += $tupla[1];

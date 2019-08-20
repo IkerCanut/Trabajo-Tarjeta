@@ -3,6 +3,8 @@
 namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
+  protected $valoresCargables = new Constantes();
+
   protected $saldo;
   
   //Que la variable plus comience desde 0 se refiere a que todavia no se ha usado ningun viaje plus
@@ -24,6 +26,33 @@ class Tarjeta implements TarjetaInterface {
   }
 
   public function recargar($monto) {
+    foreach ($tupla in $valoresCargables) {
+      if ($monto == $tupla[0]) {
+      
+        $this->saldo += $tupla[1];
+        
+        if ($this->plus == 1 && $this->saldo >= $this->precio) {
+          $this->saldo -= $this->precio;
+          $this->plus = 0;
+        }
+        if ($this->plus == 2) {
+          if ($this->saldo >= $this->precio && $this->saldo < $this->precio * 2) {
+            $this->saldo -= $this->precio;
+            $this->plus = 1;
+          }
+          if ($this->saldo >= $this->precio * 2) {
+            $this->saldo -= $this->precio;
+            $this->plus = 0;
+          }
+        }
+        
+        return true;
+      }
+    }
+    return false;
+  }
+    
+    /*
     //Chequea si es alguno de los valores aceptados que no cargan dinero extra
     if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100) {
       $this->saldo += $monto;
@@ -57,6 +86,7 @@ class Tarjeta implements TarjetaInterface {
     //Si no es ninguno de esos valores entonces no es un valor aceptado y hay que retornar false
     return false;
   }
+  */
 
   public function obtenerSaldo() {
     return $this->saldo;

@@ -4,7 +4,7 @@ namespace TrabajoTarjeta;
 
 class Constantes {
 
-public static $cargasPosibles = [
+public $cargasPosibles = [
   [10, 10],
   [20, 20],
   [30, 30],

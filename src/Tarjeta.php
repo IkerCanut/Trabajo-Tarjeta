@@ -3,7 +3,7 @@
 namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
-  protected $valoresCargables = new Constantes();
+  protected $valoresCargables = (new Constantes())->valoresCargables;
 
   protected $saldo;
   

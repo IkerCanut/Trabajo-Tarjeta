@@ -11,6 +11,8 @@ class MedioBoletoUniversitario extends Tarjeta {
     public function __construct($tiempo) {
         $this->precio = ((new Tarjeta(new TiempoFalso(0)))->precio) / 2;
         $this->tiempo = $tiempo;
+        
+        $this->valoresCargables = (new Constantes())->cargasPosibles;
     }
 
     public function puedePagar($linea, $empresa, $numero) {

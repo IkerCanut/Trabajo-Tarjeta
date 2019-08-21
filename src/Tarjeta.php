@@ -24,11 +24,11 @@ class Tarjeta implements TarjetaInterface {
     $this->tiempo = $tiempo;
     $this->saldo = $saldo;
     
-    $valoresCargables = (new Constantes())->cargasPosibles;
+    $this->valoresCargables = (new Constantes())->cargasPosibles;
   }
 
   public function recargar($monto) {
-    foreach ($valoresCargables as $tupla) {
+    foreach ($this->valoresCargables as $tupla) {
       if ($monto == $tupla[0]) {
       
         $this->saldo += $tupla[1];

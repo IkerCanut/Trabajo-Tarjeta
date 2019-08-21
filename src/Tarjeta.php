@@ -3,7 +3,7 @@
 namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
-  protected $valoresCargables = (new Constantes())->valoresCargables;
+  protected $valoresCargables;
 
   protected $saldo;
   
@@ -23,6 +23,8 @@ class Tarjeta implements TarjetaInterface {
   public function __construct($tiempo, $saldo = 0) {
     $this->tiempo = $tiempo;
     $this->saldo = $saldo;
+    
+    $valoresCargables = (new Constantes())->cargasPosibles;
   }
 
   public function recargar($monto) {

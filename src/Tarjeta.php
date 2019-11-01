@@ -30,20 +30,10 @@ class Tarjeta implements TarjetaInterface {
       
         $this->saldo += $tupla[1];
         
-        if ($this->plus == 1 && $this->saldo >= $this->precio) {
-          $this->saldo -= $this->precio;
-          $this->plus = 0;
+        while($this->plus > 0 && $this->saldo >= $this->precio){
+          $this->saldo -= $this->precio; $this->plus--;
         }
-        if ($this->plus == 2) {
-          if ($this->saldo >= $this->precio && $this->saldo < $this->precio * 2) {
-            $this->saldo -= $this->precio;
-            $this->plus = 1;
-          }
-          if ($this->saldo >= $this->precio * 2) {
-            $this->saldo -= $this->precio;
-            $this->plus = 0;
-          }
-        }
+        
         return true;
       }
     }

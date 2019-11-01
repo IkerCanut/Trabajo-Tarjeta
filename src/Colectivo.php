@@ -6,15 +6,16 @@ class Colectivo implements ColectivoInterface {
     protected $linea;
     protected $empresa;
     protected $numero;
-    protected $tiempo;
     protected $visor;
 
-    public function __construct($linea, $empresa, $numero, $tiempo) {
+    protected $logicaDePago;
+
+    public function __construct($linea, $empresa, $numero) {
         $this->linea = $linea;
         $this->empresa = $empresa;
         $this->numero = $numero;
-        $this->tiempo = $tiempo;
         $this->visor = new Visor();
+        $this->logicaDePago = new LogicaDePago();
     }
 
     public function linea() {
@@ -29,14 +30,12 @@ class Colectivo implements ColectivoInterface {
         return $this->numero;
     }
 
-    public function tiempo() {
-        return $this->tiempo->time();
-    }
+    public function pagarCon(TarjetaInterface $tarjeta, TiempoInterface $tiempo){
+   
+        $informacion = $this->logicaDePago->efectuarPago
+                ($tarjeta, $this->linea, $this->empresa, $this->numero, $tiempo);
 
-    public function pagarCon(TarjetaInterface $tarjeta) {
-        $informacion = $tarjeta->pagar($this->linea, $this->empresa, $this->numero);
         $this->visor->mostrarInformacion($informacion);
-        
         return ($informacion);
     }
 }

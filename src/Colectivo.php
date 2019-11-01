@@ -14,7 +14,7 @@ class Colectivo implements ColectivoInterface {
         $this->empresa = $empresa;
         $this->numero = $numero;
         $this->tiempo = $tiempo;
-        // $this->visor = new Visor();
+        $this->visor = new Visor();
     }
 
     public function linea() {
@@ -35,7 +35,7 @@ class Colectivo implements ColectivoInterface {
 
     public function pagarCon(TarjetaInterface $tarjeta) {
         $informacion = $tarjeta->pagar($this->linea, $this->empresa, $this->numero);
-        // $visor->mostrarInformacion($informacion);
+        $this->visor->mostrarInformacion($informacion);
         
         return ($informacion);
     }

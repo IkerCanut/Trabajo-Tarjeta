@@ -107,7 +107,7 @@ class TarjetaTest extends TestCase {
       $this->assertEquals($tarjeta->obtenerSaldo(), 0);
   }
 
-    public function testTransbordo(){
+    /*public function testTransbordo(){
         $tiempo = new TiempoFalso(0);
         $tarjeta = new Tarjeta($tiempo);
         $colectivo = new Colectivo("K","Empresa Genérica",3,$tiempo);
@@ -191,5 +191,5 @@ class TarjetaTest extends TestCase {
         $colectivo = new Colectivo("K","Empresa Genérica",3,$tiempo);
         $boleto = $colectivo->pagarCon($tarjeta);
         $this->assertEquals(new Boleto($tarjeta->precio/3,$colectivo,$tarjeta,$tiempo->time(),"transbordo"), $boleto); // Nos deja
-    }
+    }*/
 }

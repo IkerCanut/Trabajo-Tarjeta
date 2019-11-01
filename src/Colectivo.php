@@ -35,6 +35,8 @@ class Colectivo implements ColectivoInterface {
 
     public function pagarCon(TarjetaInterface $tarjeta) {
         $informacion = $tarjeta->puedePagar($this->linea, $this->empresa, $this->numero);
+
+        return ($informacion != "no");
         // $visor->mostrarInformacion($informacion);
     }
 }

@@ -26,8 +26,6 @@ interface TarjetaInterface {
      * Devuelve el saldo que le queda a la tarjeta menos el monto pasado.
      * 
      * @param float $montito
-     *
-     * @return float
      */
     public function bajarSaldo($montito);
     
@@ -40,8 +38,6 @@ interface TarjetaInterface {
     
     /**
      * Aumenta la cantidad de viajes plus en 1.
-     *
-     * @return int
      */
     public function aumentarPlus();
     

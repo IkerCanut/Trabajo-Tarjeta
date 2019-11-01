@@ -9,5 +9,5 @@ interface VisorInterface {
      *
      * @param float
      */
-    public function mostrarInformacion($saldo);
+    public function mostrarInformacion($informacion);
 }

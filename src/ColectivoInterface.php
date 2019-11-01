@@ -26,6 +26,13 @@ interface ColectivoInterface {
     public function numero();
 
     /**
+     * Devuelve el tiempo.
+     *
+     * @return int
+     */
+    public function tiempo();
+
+    /**
      * Paga un viaje en el colectivo con una tarjeta en particular.
      *
      * @param TarjetaInterface $tarjeta

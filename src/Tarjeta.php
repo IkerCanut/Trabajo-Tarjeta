@@ -118,7 +118,7 @@ class Tarjeta implements TarjetaInterface {
           }
           else {
             $this->bajarSaldo($this->precio);
-            return "normal";
+            return $this->obtenerSaldo();
           }
           break;
         case 1:
@@ -140,7 +140,7 @@ class Tarjeta implements TarjetaInterface {
             return "paga un plus";
           } else {
             $this->bajarSaldo($this->precio);
-            return "normal";
+            return $this->obtenerSaldo();
           }
           break;
         case 2:
@@ -174,7 +174,7 @@ class Tarjeta implements TarjetaInterface {
             return "paga un plus";
           } else {
             $this->bajarSaldo($this->precio);
-            return "normal";
+            return $this->obtenerSaldo();
           }
       }
     }

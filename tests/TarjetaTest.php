@@ -67,8 +67,8 @@ class TarjetaTest extends TestCase {
      */
     public function testCargaSaldo() {
         $tarjeta = new Tarjeta(new TiempoFalso(0));
+        
         $valordebido = 10;
-
         $this->assertTrue($tarjeta->recargar(10));
         $this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
 
@@ -88,12 +88,12 @@ class TarjetaTest extends TestCase {
         $this->assertTrue($tarjeta->recargar(100));
         $this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
 
-        $valordebido += 510.15 + 81.93;
-        $this->assertTrue($tarjeta->recargar(510.15));
+        $valordebido += 1300;
+        $this->assertTrue($tarjeta->recargar(1119.90));
         $this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
 
-        $valordebido += 962.59 + 221.58;
-        $this->assertTrue($tarjeta->recargar(962.59));
+        $valordebido += 2600;
+        $this->assertTrue($tarjeta->recargar(2114.11));
         $this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
     }
 

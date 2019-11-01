@@ -30,9 +30,6 @@ interface ColectivoInterface {
      *
      * @param TarjetaInterface $tarjeta
      *
-     * @return TRUE|FALSE
-     *  TRUE si pudo pagar correctamente
-     *  FALSE si no hay saldo suficiente en la tarjeta.
      */
     public function pagarCon(TarjetaInterface $tarjeta);
 

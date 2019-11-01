@@ -107,7 +107,7 @@ class Tarjeta implements TarjetaInterface {
     $this->plus ++;
   }
 
-  public function puedePagar($linea, $empresa, $numero) {
+  public function pagar($linea, $empresa, $numero) {
     $this->actualColectivo = array($linea, $empresa, $numero);
     if ($this->obtenerSaldo() >= $this->precio) {
       switch ($this->obtenerPlus()) {

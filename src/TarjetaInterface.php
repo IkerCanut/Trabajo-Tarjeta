@@ -60,7 +60,7 @@ interface TarjetaInterface {
      *
      * @return string
      */
-    public function puedePagar($linea, $empresa, $numero);
+    public function pagar($linea, $empresa, $numero);
     
     /**
      * Checkea si se cumplen las opciones necesarias para el vieje plus y devuelve true o false segun el caso.

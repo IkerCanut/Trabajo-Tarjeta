@@ -27,17 +27,17 @@ class ColectivoTest extends TestCase {
         $tarjeta = new Tarjeta($tiempo);
         $tarjeta->recargar(20);
         $valordebido = 20 - $tarjeta->precio;
-        //$this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
+        $this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
         $this->assertEquals($tarjeta->obtenerPlus(), 0);
         $tiempo->avanzar(6000);
-        //$this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
+        $this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
         $this->assertEquals($tarjeta->obtenerPlus(), 1);
         $tiempo->avanzar(6000);
-        //$this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
+        $this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
         $this->assertEquals($tarjeta->obtenerPlus(), 2);
         $tiempo->avanzar(6000);
         $this->assertEquals($bondi->pagarCon($tarjeta), false);
-        //$this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
+        $this->assertEquals($tarjeta->obtenerSaldo(), $valordebido);
         $this->assertEquals($tarjeta->obtenerPlus(), 2);
     }
 }

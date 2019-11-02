@@ -13,7 +13,7 @@ class LogicaDePago implements LogicaDePagoInterface{
             $tarjeta->anteriorNumero = $numero;
             $tarjeta->anteriorTiempo = $tiempo->time();
 
-            if ($tarjeta->viajesLimitados) {
+            if ($tarjeta->viajesLimitados != null) {
                 if (date('dMY', $tarjeta->ultimoDia) == date('dMY', $tiempo->time())){
                     $tarjeta->viajesDiarios++;
                 } else {

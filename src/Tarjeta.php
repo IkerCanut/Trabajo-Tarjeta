@@ -19,6 +19,7 @@ class Tarjeta implements TarjetaInterface {
   public $anteriorLinea = null;
   public $anteriorEmpresa = null;
   public $anteriorNumero = null;
+  public $viajesLimitados = false;
 
   public $actualColectivo;
 

@@ -23,7 +23,6 @@ class MedioBoletoUniversitario extends Tarjeta {
 
     public function obtenerPrecio(){
         if ($this->viajesDiarios < $this->limitePorDia){
-            echo "TOTALES: " . $this->viajesDiarios . " / LIMITE: " . $this->limitePorDia . "\n";
             return $this->precio;
         } else {
             return $this->precioEntero;

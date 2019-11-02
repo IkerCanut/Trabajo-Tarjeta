@@ -14,26 +14,24 @@ class Tarjeta implements TarjetaInterface {
 
   public $anteriorTiempo = null;
 
-  public $anteriorColectivo = null;
+  public $anteriorLinea = null;
+  public $anteriorEmpresa = null;
+  public $anteriorNumero = null;
 
   public $actualColectivo;
 
   public function __construct($saldo = 0) {
     $this->saldo = $saldo;
-    
     $this->valoresCargables = (new Constantes())->cargasPosibles;
   }
 
   public function recargar($monto) {
     foreach ($this->valoresCargables as $tupla) {
       if ($monto == $tupla[0]) {
-      
         $this->saldo += $tupla[1];
-        
-        while($this->plus > 0 && $this->saldo >= $this->precio){
+        while($this->plus > 0 && $this->saldo >= $this->precio) {
           $this->saldo -= $this->precio; $this->plus--;
         }
-        
         return true;
       }
     }

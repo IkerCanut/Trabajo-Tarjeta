@@ -14,10 +14,10 @@ public $cargasPosibles = [
   [2114.11, 2600]
 ];
 
-public $precioCompleto = 40;
-public $precioMedioBoletoEstudiantil = 20;
-public $precioBoletoUniversitario = 40;
-public $precioMedioBoletoUniversitario = 20;
+public $precioCompleto = 32.50;
+public $precioMedioBoletoEstudiantil = 16.25;
+public $precioBoletoUniversitario = 32.50;
+public $precioMedioBoletoUniversitario = 16.25;
 public $viajesUniversitariosPorDia = 2;
 public $precioLibre = 0;
 

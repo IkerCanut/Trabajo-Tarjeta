@@ -18,6 +18,7 @@ public $precioCompleto = 40;
 public $precioMedioBoletoEstudiantil = 20;
 public $precioBoletoUniversitario = 40;
 public $precioMedioBoletoUniversitario = 20;
+public $viajesUniversitariosPorDia = 2;
 public $precioLibre = 0;
 
 }

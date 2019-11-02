@@ -6,7 +6,8 @@ class MedioBoletoUniversitario extends Tarjeta {
 
     protected $constantes;
     protected $precioEntero;
-    
+    protected $limitePorDia;
+
     public $viajesLimitados = true;
 
     public $viajesDiarios = 0;
@@ -17,10 +18,12 @@ class MedioBoletoUniversitario extends Tarjeta {
         $this->precio = $this->constantes->precioMedioBoletoUniversitario;
         $this->precioEntero = $this->constantes->precioBoletoUniversitario;
         $this->valoresCargables = $this->constantes->cargasPosibles;
+        $this->limitePorDia = $this->constantes->viajesUniversitariosPorDia;
     }
 
     public function obtenerPrecio(){
-        if (viajesDiarios < 2){
+        if ($this->viajesDiarios < $this->limitePorDia){
+            echo "TOTALES: " . $this->viajesDiarios . " / LIMITE: " . $this->limitePorDia . "\n";
             return $this->precio;
         } else {
             return $this->precioEntero;

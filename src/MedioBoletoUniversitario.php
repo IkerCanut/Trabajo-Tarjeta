@@ -4,47 +4,26 @@ namespace TrabajoTarjeta;
 
 class MedioBoletoUniversitario extends Tarjeta {
 
-    protected $viajesDiarios = 0;
+    protected $constantes;
+    protected $precioEntero;
+    
+    public $viajesLimitados = true;
 
-    protected $diaAnterior = null;
+    public $viajesDiarios = 0;
+    public $ultimoDia = null;
 
-    public function __construct($tiempo) {
-        $this->precio = ((new Tarjeta(new TiempoFalso(0)))->precio) / 2;
-        $this->tiempo = $tiempo;
-        
-        $this->valoresCargables = (new Constantes())->cargasPosibles;
+    public function __construct() {
+        $this->constantes = new Constantes();
+        $this->precio = $this->constantes->precioMedioBoletoUniversitario;
+        $this->precioEntero = $this->constantes->precioBoletoUniversitario;
+        $this->valoresCargables = $this->constantes->cargasPosibles;
     }
 
-    public function pagar($linea, $empresa, $numero) {
-        $this->cambioDeDia();
-        $actual = $this->tiempo->time();
-        $diferencia = $actual-($this->anteriorTiempo);
-        if ($this->viajesDiarios >= 2) {
-            $this->precio = (new Tarjeta(new TiempoFalso(0)))->precio;
+    public function obtenerPrecio(){
+        if (viajesDiarios < 2){
+            return $this->precio;
         } else {
-            $this->precio = ((new Tarjeta(new TiempoFalso(0)))->precio) / 2;
+            return $this->precioEntero;
         }
-        if (($diferencia >= 300) || $this->anteriorTiempo === null) {
-            $resultado = parent::pagar($linea, $empresa, $numero);
-            if ($resultado != "no") {
-                $this->anteriorTiempo = $actual;
-                $this->viajesDiarios++;
-            }
-            return $resultado;
-        }
-        return "no";
-    }
-
-    /**
-     * Cambia "diaAnterior" al tiempo actual.
-     * Cambia "viejesDiarios" a 0 si nunca se viajo o si ya paso un dia entero desde el ultimo viaje.
-     */
-    public function cambioDeDia() {
-        if ($this->diaAnterior != null) {
-            if ((($this->tiempo->time())-($this->diaAnterior)) >= (3600 * 24)) {
-                $this->viajesDiarios = 0;
-            }
-        }
-        $this->diaAnterior = $this->tiempo->time();
     }
 }

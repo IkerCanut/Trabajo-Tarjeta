@@ -7,11 +7,12 @@ class LogicaDePago implements LogicaDePagoInterface{
         if ($this->checkTransbordo($tarjeta, $linea, $empresa, $numero, $tiempo)){
             return "Transbordo";
         } else if ($this->checkSaldo($tarjeta, $linea, $empresa, $numero, $tiempo)){
-            $tarjeta->bajarSaldo($tarjeta->precio);
+            $tarjeta->bajarSaldo($tarjeta->obtenerPrecio());
             $tarjeta->anteriorLinea = $linea;
             $tarjeta->anteriorEmpresa = $empresa;
             $tarjeta->anteriorNumero = $numero;
             $tarjeta->anteriorTiempo = $tiempo->time();
+
             return $tarjeta->obtenerSaldo();
         } else if ($this->checkPlus($tarjeta)){
             $tarjeta->aumentarPlus();
@@ -31,7 +32,7 @@ class LogicaDePago implements LogicaDePagoInterface{
     }
 
     private function checkSaldo(TarjetaInterface $tarjeta, $linea, $empresa, $numero, TiempoInterface $tiempo){
-        return ($tarjeta->obtenerSaldo() >= $tarjeta->precio);
+        return ($tarjeta->obtenerSaldo() >= $tarjeta->obtenerPrecio());
     }
 
     private function checkPlus(TarjetaInterface $tarjeta){

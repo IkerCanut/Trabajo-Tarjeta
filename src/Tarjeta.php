@@ -7,10 +7,12 @@ class Tarjeta implements TarjetaInterface {
 
   protected $saldo;
   
+  protected $constantes;
+
   //Que la variable plus comience desde 0 se refiere a que todavia no se ha usado ningun viaje plus
   protected $plus = 0;
 
-  public $precio = 14.80;
+  protected $precio = null;
 
   public $anteriorTiempo = null;
 
@@ -22,7 +24,9 @@ class Tarjeta implements TarjetaInterface {
 
   public function __construct($saldo = 0) {
     $this->saldo = $saldo;
-    $this->valoresCargables = (new Constantes())->cargasPosibles;
+    $this->constantes = new Constantes();
+    $this->valoresCargables = $this->constantes->cargasPosibles;
+    $this->precio = $this->constantes->precioCompleto;
   }
 
   public function recargar($monto) {
@@ -36,6 +40,14 @@ class Tarjeta implements TarjetaInterface {
       }
     }
     return false;
+  }
+
+  public function setPrecio($nuevo){
+    $this->precio = $nuevo;
+  }
+
+  public function obtenerPrecio(){
+    return $this->precio;
   }
 
   public function obtenerSaldo() {

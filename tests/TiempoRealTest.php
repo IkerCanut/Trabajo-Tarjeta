@@ -6,10 +6,18 @@ use PHPUnit\Framework\TestCase;
 
 class TiempoRealTest extends TestCase {
 
-    /*public function testPasoDelTiempo() {
-        $time = new TiempoReal();
-        $ahora = $time->time();
-        sleep(3);
-        $this->assertGreaterThanOrEqual($ahora,$time->time());
-    }*/
+    protected $tiempoDePrueba;
+    
+    public function __Construct () {
+        $this->tiempoDePrueba = New TiempoReal();
+    }
+    
+    /*
+     *  Verifica que el tiempo avanza correctamente
+     */
+    public function testTime () {
+        $prediccion = $this->tiempoDePrueba->time() + 5;
+        sleep(5);
+        $this->assertEquals($this->tiempoDePrueba->time(), $prediccion);
+    }
 }

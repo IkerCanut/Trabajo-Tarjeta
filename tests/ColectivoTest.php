@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class ColectivoTest extends TestCase {
 
-    public function testPagarConSaldo() {
+    /*public function testPagarConSaldo() {
         $time = new TiempoFalso(0);
         $bondi = new Colectivo("K", "Empresa generica", 3, $time);
         $tarjeta = new Tarjeta($time);
@@ -21,7 +21,7 @@ class ColectivoTest extends TestCase {
         $this->assertEquals($colectivo->numero(), 3);
     }
     
-    /*public function testPagarSinSaldo() {
+    public function testPagarSinSaldo() {
         $tiempo = new TiempoFalso(0);
         $bondi = new Colectivo("K", "Empresa generica", 3, $tiempo);
         $tarjeta = new Tarjeta($tiempo);

@@ -6,9 +6,9 @@ use PHPUnit\Framework\TestCase;
 
 class MedioBoletoEstudiantilTest extends TestCase {
 
-    public function testCincoMinutos(){
+    /*public function testCincoMinutos(){
         $this->assertEquals(2, 1+1);
-    }
+    }*/
     
     /*
      * Testea que la tarjeta solo pueda usarse cada 5 minutos

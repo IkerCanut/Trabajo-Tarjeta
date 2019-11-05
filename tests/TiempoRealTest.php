@@ -16,8 +16,8 @@ class TiempoRealTest extends TestCase {
      *  Verifica que el tiempo avanza correctamente
      */
     public function testTime () {
-        $prediccion = $this->tiempoDePrueba->time() + 5;
+        $prediccion = $this->tiempoDePrueba->time();
         sleep(5);
-        $this->assertEquals($this->tiempoDePrueba->time(), $prediccion);
+        $this->assertEquals(($this->tiempoDePrueba->time() - 5), $prediccion);
     }
 }

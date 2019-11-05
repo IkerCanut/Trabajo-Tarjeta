@@ -68,7 +68,7 @@ class LogicaDePago implements LogicaDePagoInterface{
         }
     }
 
-    private function esDiaHabil6a22($tiempo){
+    public function esDiaHabil6a22($tiempo){
         if (!$this->esFestivo($tiempo) && !$this->esMedioFestivo($tiempo) &&
         date('D', $tiempo) != "Sat" && date('D', $tiempo) != "Sun") {
             return (date('H', $tiempo) >= 6) && (date('H', $tiempo) < 22);
@@ -76,14 +76,14 @@ class LogicaDePago implements LogicaDePagoInterface{
         return false;
     }
 
-    private function esSabadoOMedioFestivo6a14($tiempo){
+    public function esSabadoOMedioFestivo6a14($tiempo){
         if (date('D', $tiempo) == "Sat" || $this->esMedioFestivo($tiempo)){
             return (date('H', $tiempo) >= 6 && date('H', $tiempo) < 14);
         }
         return false;
     }
 
-    private function esDe22a6($tiempo){
+    public function esDe22a6($tiempo){
         return (date('H', $tiempo) >= 22 || date('H', $tiempo) < 6);
     }
 
@@ -94,24 +94,24 @@ class LogicaDePago implements LogicaDePagoInterface{
         return false;
     }
 
-    private function esDomingo($tiempo){
+    public function esDomingo($tiempo){
         return date('D', $tiempo) == "Sun";
     }
 
 
-    private function esFestivo($tiempo){
+    public function esFestivo($tiempo){
         return false;
     }
     
-    private function esMedioFestivo($tiempo){
+    public function esMedioFestivo($tiempo){
         return false;
     }
 
-    private function checkSaldo(TarjetaInterface $tarjeta, $linea, $empresa, $numero, TiempoInterface $tiempo){
+    public function checkSaldo(TarjetaInterface $tarjeta, $linea, $empresa, $numero, TiempoInterface $tiempo){
         return ($tarjeta->obtenerSaldo() >= $tarjeta->obtenerPrecio());
     }
 
-    private function checkPlus(TarjetaInterface $tarjeta){
+    public function checkPlus(TarjetaInterface $tarjeta){
         return ($tarjeta->obtenerPlus() < 2);
     }
 }

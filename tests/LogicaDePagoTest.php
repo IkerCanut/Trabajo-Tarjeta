@@ -134,7 +134,7 @@ class LogicaDePagoTest extends TestCase {
             // Avanza 3 horas.
             $this->tiempoDePrueba->avanzar(10800);
             
-            $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba),"Plus");
+            $this->assertNotEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba),"Plus");
             
             // Avanza 3 horas.
             $this->tiempoDePrueba->avanzar(10800);

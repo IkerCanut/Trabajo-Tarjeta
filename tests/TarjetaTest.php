@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 class TarjetaTest extends TestCase {
     
     protected $tarjetaDePrueba;
+    protected $otraTarjetaDePrueba;
     protected $constantesDePrueba;
 
     public function testRecargar () {
@@ -29,7 +30,11 @@ class TarjetaTest extends TestCase {
     
     public function testObtenerSaldo () {
         
-        $this->assertTrue(TRUE);
+        $this->tarjetaDePrueba = New Tarjeta();
+        $this->otraTarjetaDePrueba = New Tarjeta(200);
+        
+        $this->assertEquals($this->tarjetaDePrueba->obtenerSaldo(),0);
+        $this->assertEquals($this->otraTarjetaDePrueba->obtenerSaldo(),200);
     }
     
     public function testBajarSaldo () {

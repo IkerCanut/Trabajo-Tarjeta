@@ -106,6 +106,6 @@ class LogicaDePagoTest extends TestCase {
         $this->otraTarjetaDePrueba->aumentarPlus();
         
         // Prueba con 2 plus usados.
-        $this->assertTrue($this->logicaDePrueba->checkPlus($this->otraTarjetaDePrueba));
+        $this->assertTrue(!($this->logicaDePrueba->checkPlus($this->otraTarjetaDePrueba)));
     }
 }

@@ -11,11 +11,6 @@ class LogicaDePagoTest extends TestCase {
         $this->assertTrue(TRUE);
     }
     
-    public function testCheckTransbordo () {
-        
-        $this->assertTrue(TRUE);
-    }
-    
     public function testEsDiaHabil6a22 () {
         
         $this->assertTrue(TRUE);

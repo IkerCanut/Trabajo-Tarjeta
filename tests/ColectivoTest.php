@@ -6,8 +6,13 @@ use PHPUnit\Framework\TestCase;
 
 class ColectivoTest extends TestCase {
     
+    protected $colectivoDePrueba;
+    
     public function testLinea () {
-        $this->assertTrue(TRUE);
+        
+        $this->colectivoDePrueba = New Colectivo(145, "RosarioBus", 1);
+        
+        $this->assertEqueals($this->colectivoDePrueba->linea(),145);
     }
     
     public function testEmpresa () {

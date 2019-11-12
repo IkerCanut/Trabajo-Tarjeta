@@ -82,7 +82,7 @@ class LogicaDePagoTest extends TestCase {
             $this->assertNotEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba),"No puede viajar");
             
         // Prueba el medio boleto estudiantil.
-            $saldoInicial = 35.0
+            $saldoInicial = 35.0;
             $this->tarjetaDePrueba = New MedioBoletoEstudiantil($saldoInicial);
             
             $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba),($saldoInicial - $this->tarjetaDePrueba->obtenerPrecio()));

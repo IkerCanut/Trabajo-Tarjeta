@@ -10,7 +10,10 @@ class TiempoFalsoTest extends TestCase {
     
     public function testAvanzar () {
         
-        $this->assertTrue(TRUE);
+        $this->tiempoDePrueba = New TiempoFalso (100);
+        $this->tiempoDePrueba->avanzar(200);
+        
+        $this->assertEquals(300,$this->tiempoDePrueba->time());
     }
     
     public function testTime () {

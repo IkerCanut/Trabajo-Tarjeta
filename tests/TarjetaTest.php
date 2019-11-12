@@ -12,7 +12,13 @@ class TarjetaTest extends TestCase {
 
     public function testRecargar () {
         
-        $this->assertTrue(TRUE);
+        $this->tarjetaDePrueba = New Tarjeta(0);
+        $this->constantesDePrueba = New Constantes();
+        
+        $this->assertTrue($this->tarjetaDePrueba->recargar($this->constantesDePrueba->cargasPosibles[0][0]));
+        $this->assertEquals($this->tarjetaDePrueba->obtenerSaldo(),$this->constantesDePrueba->cargasPosibles[0][0]);
+        $this->assertTrue(!($this->tarjetaDePrueba->recargar(1)));
+        $this->assertEquals($this->tarjetaDePrueba->obtenerSaldo(),$this->constantesDePrueba->cargasPosibles[0][0]);
     }
     
     public function testSetPrecio () {

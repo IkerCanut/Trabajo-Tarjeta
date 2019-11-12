@@ -14,7 +14,42 @@ class LogicaDePagoTest extends TestCase {
     
     public function testEfectuarPago () {
         
-        $this->assertTrue(TRUE);
+        $this->logicaDePrueba = New LogicaDePago();
+        $this->colectivoDePrueba = New Colectivo(145, "RosarioBus", 1);
+        // Viernes a las 00:00
+        $this->tiempoDePrueba = New TiempoFalso(86400);
+        $saldoInicial = 70.0;
+        
+        // Prueba la tarjeta normal.
+            $this->tarjetaDePrueba = New Tarjeta($saldoInicial);
+            
+            $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba->time()),($saldoInicial - $this->tarjetaDePrueba->obtenerPrecio()));
+            
+            // Avanza 2 horas.
+            $this->tiempoDePrueba->avanzar(7200);
+            
+            $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba->time()),($saldoInicial - $this->tarjetaDePrueba->obtenerPrecio() - $this->tarjetaDePrueba->obtenerPrecio()));
+            
+            // Avanza media hora.
+            $this->tiempoDePrueba->avanzar(1800);
+            
+            $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba->time()),"Transbordo");
+            
+            // Avanza 2 horas.
+            $this->tiempoDePrueba->avanzar(7200);
+            
+            $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba->time()),"Plus");
+            
+            // Avanza 2 horas.
+            $this->tiempoDePrueba->avanzar(7200);
+            
+            $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba->time()),"Plus");
+            
+            // Avanza 2 horas.
+            $this->tiempoDePrueba->avanzar(7200);
+            
+            $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba->time()),"No puede viajar");
+            
     }
     
     public function testEsDiaHabil6a22 () {

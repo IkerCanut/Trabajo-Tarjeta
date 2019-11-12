@@ -98,7 +98,6 @@ class LogicaDePago implements LogicaDePagoInterface{
         return date('D', $tiempo) == "Sun";
     }
 
-
     public function esFestivo($tiempo){
         return false;
     }

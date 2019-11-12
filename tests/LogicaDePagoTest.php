@@ -53,6 +53,7 @@ class LogicaDePagoTest extends TestCase {
         
         // Prueba la franquicia completa.
             $this->tarjetaDePrueba = New FranquiciaCompleta();
+            $this->tiempoDePrueba = New TiempoFalso(86400);
             
             $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba),1);
             
@@ -84,6 +85,7 @@ class LogicaDePagoTest extends TestCase {
         // Prueba el medio boleto estudiantil.
             $saldoInicial = 35.0;
             $this->tarjetaDePrueba = New MedioBoletoEstudiantil($saldoInicial);
+            $this->tiempoDePrueba = New TiempoFalso(86400);
             
             $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba),($saldoInicial - $this->tarjetaDePrueba->obtenerPrecio()));
             
@@ -115,6 +117,7 @@ class LogicaDePagoTest extends TestCase {
         // Prueba el medio boleto universitario.
             $saldoInicial = 50.0;
             $this->tarjetaDePrueba = New MedioBoletoEstudiantil($saldoInicial);
+            $this->tiempoDePrueba = New TiempoFalso(86400);
             
             $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba),($saldoInicial - $this->tarjetaDePrueba->obtenerPrecio()));
             

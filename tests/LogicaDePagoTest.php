@@ -117,7 +117,7 @@ class LogicaDePagoTest extends TestCase {
         // Prueba el medio boleto universitario.
             $saldoInicial = 50.0;
             $this->tarjetaDePrueba = New MedioBoletoEstudiantil($saldoInicial);
-            $this->tiempoDePrueba = New TiempoFalso(86400);
+            $this->tiempoDePrueba = New TiempoFalso(87000);
             
             $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba),($saldoInicial - $this->tarjetaDePrueba->obtenerPrecio()));
             

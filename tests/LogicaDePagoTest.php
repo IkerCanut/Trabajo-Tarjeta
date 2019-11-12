@@ -42,12 +42,14 @@ class LogicaDePagoTest extends TestCase {
         
         $this->logicaDePrueba = New LogicaDePago();
         
-        $this->assertTrue(!($this->esFestivo(0)));
+        $this->assertTrue(!($this->logicaDePrueba->esFestivo(0)));
     }
     
     public function testEsMedioFestivo () {
         
-        $this->assertTrue(TRUE);
+        $this->logicaDePrueba = New LogicaDePago();
+        
+        $this->assertTrue(!($this->logicaDePrueba->esMedioFestivo(0)));
     }
     
     public function testCheckSaldo () {

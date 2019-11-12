@@ -23,8 +23,16 @@ class LogicaDePagoTest extends TestCase {
     }
     
     public function testEsSabadoOMedioFestivo6a14 () {
+        $this->logicaDePrueba = New LogicaDePago();
         
-        $this->assertTrue(TRUE);
+        // 00:00 de un Viernes.
+        $this->assertTrue(!($this->logicaDePrueba->esDe22a6(86400)));
+        
+        // 12:00 de un Sabado.
+        $this->assertTrue(!($this->logicaDePrueba->esDomingo(259200)));
+        
+        // 18:00 de un Sabado.
+        $this->assertTrue(!($this->logicaDePrueba->esDomingo(129600)));
     }
     
     public function testEsDe22a6 () {

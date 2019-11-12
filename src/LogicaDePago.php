@@ -16,6 +16,9 @@ class LogicaDePago implements LogicaDePagoInterface{
             if ($tarjeta->viajesLimitados != null) {
                 if (date('dMY', $tarjeta->ultimoDia) == date('dMY', $tiempo->time())){
                     $tarjeta->viajesDiarios++;
+                } else if ($tarjeta->ultimoDia == null) {
+                    $tarjeta->ultimoDia = $tiempo->time();
+                    $tarjeta->viajesDiarios++;
                 } else {
                     $tarjeta->ultimoDia = $tiempo->time();
                     $tarjeta->viajesDiarios = 0;

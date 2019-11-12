@@ -12,7 +12,7 @@ class ColectivoTest extends TestCase {
         
         $this->colectivoDePrueba = New Colectivo(145, "RosarioBus", 1);
         
-        $this->assertEqueals($this->colectivoDePrueba->linea(),145);
+        $this->assertEquals($this->colectivoDePrueba->linea(),145);
     }
     
     public function testEmpresa () {

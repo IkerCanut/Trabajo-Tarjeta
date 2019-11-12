@@ -48,7 +48,7 @@ class ColectivoTest extends TestCase {
             // Avanza media hora.
             $this->tiempoDePrueba->avanzar(1800);
             
-            $this->assertEquals($this->colectivoDePrueba->pagarCon($this->tarjetaDePrueba,$this->tiempoDePrueba),"Transbordo");
+            $this->assertEquals($this->otroColectivoDePrueba->pagarCon($this->tarjetaDePrueba,$this->tiempoDePrueba),"Transbordo");
             
             // Avanza 3 horas.
             $this->tiempoDePrueba->avanzar(10800);

@@ -38,7 +38,7 @@ class LogicaDePagoTest extends TestCase {
         $this->logicaDePrueba = New LogicaDePago();
         
         $this->assertTrue(!($this->logicaDePrueba->esDomingo(100)));
-        $this->assertTrue($this->logicaDePrueba->esDomingo(180000));
+        $this->assertTrue($this->logicaDePrueba->esDomingo(260000));
     }
     
     public function testEsFestivo () {

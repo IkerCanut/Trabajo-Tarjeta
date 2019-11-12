@@ -67,24 +67,48 @@ class LogicaDePagoTest extends TestCase {
         $this->colectivoDePrueba = New Colectivo(145, "RosarioBus", 1);
         $this->tiempoDePrueba = New TiempoFalso(86400);
         
+        // Prueba las tarjetas comunes.
         $this->assertTrue(!($this->logicaDePrueba->checkSaldo($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba)));
         $this->assertTrue($this->logicaDePrueba->checkSaldo($this->otraTarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba));
         
+        // Prueba las franquicias estudiantiles.
         $this->tarjetaDePrueba = New MedioBoletoEstudiantil(10.0);
         $this->otraTarjetaDePrueba = New MedioBoletoEstudiantil(50.0);
         
         $this->assertTrue(!($this->logicaDePrueba->checkSaldo($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba)));
         $this->assertTrue($this->logicaDePrueba->checkSaldo($this->otraTarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba));
         
+        // Prueba las franquicias universitarias.
         $this->tarjetaDePrueba = New MedioBoletoUniversitario(10.0);
         $this->otraTarjetaDePrueba = New MedioBoletoUniversitario(50.0);
         
         $this->assertTrue(!($this->logicaDePrueba->checkSaldo($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba)));
         $this->assertTrue($this->logicaDePrueba->checkSaldo($this->otraTarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba));
+        
+        // Prueba las franquicias completas.
+        $this->tarjetaDePrueba = New FranquiciaCompleta(10.0);
+        $this->otraTarjetaDePrueba = New FranquiciaCompleta(50.0);
+        
+        $this->assertTrue(!($this->logicaDePrueba->checkSaldo($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba)));
+        $this->assertTrue($this->logicaDePrueba->checkSaldo($this->otraTarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba));
+    
     }
     
     public function testCheckPlus () {
         
-        $this->assertTrue(TRUE);
+        $this->logicaDePrueba = New LogicaDePago();
+        $this->tarjetaDePrueba = New Tarjeta();
+        $this->otraTarjetaDePrueba = New Tarjeta();
+        
+        $this->otraTarjetaDePrueba->aumentarPlus();
+        
+        // Prueba con 0 y 1 plus usados respectivamente.
+        $this->assertTrue($this->tarjetaDePrueba);
+        $this->assertTrue($this->otraTarjetaDePrueba);
+        
+        $this->otraTarjetaDePrueba->aumentarPlus();
+        
+        // Prueba con 2 plus usados.
+        $this->assertTrue($this->otraTarjetaDePrueba);
     }
 }

@@ -64,7 +64,7 @@ class LogicaDePagoTest extends TestCase {
         $this->logicaDePrueba = New LogicaDePago();
         $this->tarjetaDePrueba = New Tarjeta(10);
         $this->otraTarjetaDePrueba = New Tarjeta(50);
-        $this->colectivoDePrueba = New colectivoDePrueba(145, "RosarioBus", 1);
+        $this->colectivoDePrueba = New Colectivo(145, "RosarioBus", 1);
         $this->tiempoDePrueba = New TiempoFalso(86400);
         
         $this->assertTrue(!($this->logicaDePrueba->checkSaldo($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba)));

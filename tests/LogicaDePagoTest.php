@@ -54,7 +54,7 @@ class LogicaDePagoTest extends TestCase {
         // Prueba la franquicia completa.
             $this->tarjetaDePrueba = New FranquiciaCompleta();
             
-            $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba),$this->tarjetaDePrueba->obtenerPrecio());
+            $this->assertEquals($this->logicaDePrueba->efectuarPago($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba),1);
             
             // Avanza 3 horas.
             $this->tiempoDePrueba->avanzar(10800);

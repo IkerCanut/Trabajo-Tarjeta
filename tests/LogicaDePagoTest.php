@@ -86,12 +86,9 @@ class LogicaDePagoTest extends TestCase {
         $this->assertTrue($this->logicaDePrueba->checkSaldo($this->otraTarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba));
         
         // Prueba las franquicias completas.
-        $this->tarjetaDePrueba = New FranquiciaCompleta(10.0);
-        $this->otraTarjetaDePrueba = New FranquiciaCompleta(50.0);
+        $this->tarjetaDePrueba = New FranquiciaCompleta();
         
-        $this->assertTrue(!($this->logicaDePrueba->checkSaldo($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba)));
         $this->assertTrue($this->logicaDePrueba->checkSaldo($this->otraTarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba));
-    
     }
     
     public function testCheckPlus () {
@@ -103,12 +100,12 @@ class LogicaDePagoTest extends TestCase {
         $this->otraTarjetaDePrueba->aumentarPlus();
         
         // Prueba con 0 y 1 plus usados respectivamente.
-        $this->assertTrue($this->tarjetaDePrueba);
-        $this->assertTrue($this->otraTarjetaDePrueba);
+        $this->assertTrue($this->logicaDePrueba->checkPlus($this->tarjetaDePrueba));
+        $this->assertTrue($this->logicaDePrueba->checkPlus($this->otraTarjetaDePrueba));
         
         $this->otraTarjetaDePrueba->aumentarPlus();
         
         // Prueba con 2 plus usados.
-        $this->assertTrue($this->otraTarjetaDePrueba);
+        $this->assertTrue($this->logicaDePrueba->checkPlus($this->otraTarjetaDePrueba));
     }
 }

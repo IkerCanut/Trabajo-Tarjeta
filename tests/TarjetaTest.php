@@ -33,10 +33,10 @@ class TarjetaTest extends TestCase {
         $this->tarjetaDePrueba = New Tarjeta(0);
         
         $this->tarjetaDePrueba->aumentarPlus();
-        $this->tarjetaDePrueba->recargar($this->constantesDePrueba->cargasPosibles[3][3]);
+        $this->tarjetaDePrueba->recargar($this->constantesDePrueba->cargasPosibles[3][0]);
         
         $this->assertEquals($this->tarjetaDePrueba->obtenerPlus(),0);
-        $this->assertEquals($this->tarjetaDePrueba->obtenerSaldo(),($this->constantesDePrueba->cargasPosibles[3][3])-($this->constantesDePrueba->precioCompleto));
+        $this->assertEquals($this->tarjetaDePrueba->obtenerSaldo(),($this->constantesDePrueba->cargasPosibles[3][0])-($this->constantesDePrueba->precioCompleto));
     }
     
     public function testSetPrecio () {

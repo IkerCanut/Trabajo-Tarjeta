@@ -10,7 +10,7 @@ class MedioBoletoUniversitario extends Tarjeta {
 
     public $viajesLimitados = true;
 
-    public $viajesDiarios = 0;
+    public $viajesDiarios = 1;
     public $ultimoDia = null;
 
     public function __construct($saldo = 0) {

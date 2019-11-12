@@ -5,13 +5,12 @@ namespace TrabajoTarjeta;
 use PHPUnit\Framework\TestCase;
 
 class FranquiciaCompletaTest extends TestCase {
-    /**
-     * Comprueba que siempre se pueda pagar con una tarjeta de franquicia completa
+
+    /*
+     *  Verifica que se construya correctemante la instancia.
      */
-    /*public function testSiemprePagar(){
-        $completitoDeJamonYQueso = new FranquiciaCompleta(new TiempoFalso(0));
-        $saldo = $completitoDeJamonYQueso->obtenerSaldo();
-        $completitoDeJamonYQueso->bajarSaldo($completitoDeJamonYQueso->precio);
-        $this->assertEquals($saldo,$completitoDeJamonYQueso->obtenerSaldo());
-    }*/
+    public function testConstruct () {
+        
+        $this->assertTrue(TRUE);
+    }
 }

@@ -18,8 +18,16 @@ class LogicaDePagoTest extends TestCase {
     }
     
     public function testEsDiaHabil6a22 () {
+        $this->logicaDePrueba = New LogicaDePago();
         
-        $this->assertTrue(TRUE);
+        // 00:00 de un Viernes.
+        $this->assertTrue(!($this->logicaDePrueba->esDiaHabil6a22(86400)));
+        
+        // 12:00 de un Sabado.
+        $this->assertTrue(!($this->logicaDePrueba->esDiaHabil6a22(216000)));
+        
+        // 18:00 de un Viernes.
+        $this->assertTrue($this->logicaDePrueba->esDiaHabil6a22(151200));
     }
     
     public function testEsSabadoOMedioFestivo6a14 () {
@@ -29,10 +37,10 @@ class LogicaDePagoTest extends TestCase {
         $this->assertTrue(!($this->logicaDePrueba->esSabadoOMedioFestivo6a14(86400)));
         
         // 12:00 de un Sabado.
-        $this->assertTrue(!($this->logicaDePrueba->esSabadoOMedioFestivo6a14(259200)));
+        $this->assertTrue($this->logicaDePrueba->esSabadoOMedioFestivo6a14(216000));
         
         // 18:00 de un Sabado.
-        $this->assertTrue(!($this->logicaDePrueba->esSabadoOMedioFestivo6a14(129600)));
+        $this->assertTrue(!($this->logicaDePrueba->esSabadoOMedioFestivo6a14(237600‬)));
     }
     
     public function testEsDe22a6 () {

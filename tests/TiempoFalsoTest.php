@@ -17,6 +17,6 @@ class TiempoFalsoTest extends TestCase {
     
         $this->tiempoDePrueba = New TiempoFalso (0);
         
-        $this->assertEquals(0,$tiempoDePueba->time());
+        $this->assertEquals(0,$this->tiempoDePueba->time());
     }
 }

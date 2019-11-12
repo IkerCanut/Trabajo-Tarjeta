@@ -11,6 +11,9 @@ class MedioBoletoEstudiantilTest extends TestCase {
      */
     public function testConstruct () {
         
-        $this->assertTrue(TRUE);
+        $this->tarjetaDePrueba = New MedioBoletoEstudiantil();
+        $this->constantesDePrueba = New Constantes();
+        
+        $this->assertEquals($this->tarjetaDePrueba->precio,$this->constantesDePrueba->precioMedioBoletoEstudiantil);        
     }
 }

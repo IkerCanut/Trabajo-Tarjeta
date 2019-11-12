@@ -14,6 +14,6 @@ class FranquiciaCompletaTest extends TestCase {
         $this->tarjetaDePrueba = New FranquiciaCompleta();
         $this->constantesDePrueba = New Constantes();
         
-        $this->assertEquals($this->tarjetaDePrueba->precio,$this->constantesDePrueba->precioLibre);        
+        $this->assertEquals($this->tarjetaDePrueba->obtenerPrecio(),$this->constantesDePrueba->precioLibre);
     }
 }

@@ -14,6 +14,6 @@ class MedioBoletoEstudiantilTest extends TestCase {
         $this->tarjetaDePrueba = New MedioBoletoEstudiantil();
         $this->constantesDePrueba = New Constantes();
         
-        $this->assertEquals($this->tarjetaDePrueba->precio,$this->constantesDePrueba->precioMedioBoletoEstudiantil);        
+        $this->assertEquals($this->tarjetaDePrueba->obtenerPrecio(),$this->constantesDePrueba->precioMedioBoletoEstudiantil);
     }
 }

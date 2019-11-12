@@ -7,7 +7,8 @@ class FranquiciaCompleta extends Tarjeta {
   protected $saldo = 1;
   protected $constantes;
 
-  public function __construct($saldo = 0) {
+  public function __construct($saldo = 1) {
+    $this->saldo = $saldo;
     $this->constantes = new Constantes();
     $this->precio = $this->constantes->precioLibre;
   }

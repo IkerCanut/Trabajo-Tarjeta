@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 
 class LogicaDePagoTest extends TestCase {
     
+    protected $logicaDePrueba;
+    
     public function testEfectuarPago () {
         
         $this->assertTrue(TRUE);
@@ -38,7 +40,9 @@ class LogicaDePagoTest extends TestCase {
     
     public function testEsFestivo () {
         
-        $this->assertTrue(TRUE);
+        $this->logicaDePrueba = New LogicaDePago();
+        
+        $this->assertTrue(!($this->esFestivo(0)));
     }
     
     public function testEsMedioFestivo () {

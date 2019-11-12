@@ -5,6 +5,9 @@ namespace TrabajoTarjeta;
 use PHPUnit\Framework\TestCase;
 
 class TarjetaTest extends TestCase {
+    
+    protected $tarjetaDePrueba;
+    protected $constantesDePrueba;
 
     public function testRecargar () {
         
@@ -18,7 +21,10 @@ class TarjetaTest extends TestCase {
     
     public function testObtenerPrecio () {
         
-        $this->assertTrue(TRUE);
+        $this->tarjetaDePrueba = New Tarjeta();
+        $this->constantesDePrueba = New Constantes();
+        
+        $this->assertEquals($this->tarjetaDePrueba->obtenerPrecio(),$this->constantesDePrueba->precioCompleto);
     }
     
     public function testObtenerSaldo () {

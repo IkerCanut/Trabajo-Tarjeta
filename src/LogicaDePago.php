@@ -18,7 +18,7 @@ class LogicaDePago implements LogicaDePagoInterface{
                     $tarjeta->viajesDiarios++;
                 } else {
                     $tarjeta->ultimoDia = $tiempo->time();
-                    $tarjeta->viajesDiarios = 1;
+                    $tarjeta->viajesDiarios = 0;
                 }
             }
 

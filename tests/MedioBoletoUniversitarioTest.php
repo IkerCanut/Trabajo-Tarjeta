@@ -29,7 +29,7 @@ class MedioBoletoUniversitarioTest extends TestCase {
         
         for($i = 0; $i < $this->constantesDePrueba->viajesUniversitariosPorDia; $i++) {
             
-            $this->assertEquals($this->tarjetaDePrueba->obtenerPrecio(),$this->constantesDePrueba->$this->constantes->precioMedioBoletoUniversitario);
+            $this->assertEquals($this->tarjetaDePrueba->obtenerPrecio(),$this->constantesDePrueba->precioMedioBoletoUniversitario);
             $this->tarjetaDePrueba->viajesDiarios ++;
         }
         

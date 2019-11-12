@@ -14,7 +14,9 @@ class TiempoFalsoTest extends TestCase {
     }
     
     public function testTime () {
+    
+        $this->tiempoDePrueba = New TiempoFalso (0);
         
-        $this->assertTrue(TRUE);
+        $this->assertEquals(0,$tiempoDePueba->time());
     }
 }

@@ -39,7 +39,10 @@ class TarjetaTest extends TestCase {
     
     public function testBajarSaldo () {
         
-        $this->assertTrue(TRUE);
+        $this->tarjetaDePrueba = New Tarjeta(100);
+        $this->tarjetaDePrueba->bajarSaldo(50);
+        
+        $this-assertEquals($this->tarjetaDePrueba->obtenerSaldo(),50);
     }
     
     public function testObtenerPlus () {

@@ -71,7 +71,7 @@ class LogicaDePagoTest extends TestCase {
         $this->assertTrue($this->logicaDePrueba->checkSaldo($this->otraTarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba));
         
         $this->tarjetaDePrueba = New MedioBoletoEstudiantil(10);
-        $this->otraTarjetaDePrueba = New MedioBoletoEstudiantil(30);
+        $this->otraTarjetaDePrueba = New MedioBoletoEstudiantil(50);
         
         $this->assertTrue(!($this->logicaDePrueba->checkSaldo($this->tarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba)));
         $this->assertTrue($this->logicaDePrueba->checkSaldo($this->otraTarjetaDePrueba,$this->colectivoDePrueba->linea(),$this->colectivoDePrueba->empresa(),$this->colectivoDePrueba->numero(),$this->tiempoDePrueba));

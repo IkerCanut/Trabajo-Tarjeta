@@ -51,6 +51,9 @@ class TarjetaTest extends TestCase {
     
     public function testAumentarPlus () {
         
-        $this->assertTrue(TRUE);
+        $this->tarjetaDePrueba = New Tarjeta();
+        $this->tarjetaDePrueba->aumentarPlus();
+        
+        $this->assertEquals($this->tarjetaDePrueba->obtenerPlus(),1);
     }
 }

@@ -17,7 +17,10 @@ class TarjetaTest extends TestCase {
     
     public function testSetPrecio () {
         
-        $this->assertTrue(TRUE);
+        $this->tarjetaDePrueba = New Tarjeta();
+        $this->tarjetaDePrueba->setPrecio(50);
+        
+        $this->assertEquals($this->tarjetaDePrueba->obtenerPrecio(),50);
     }
     
     public function testObtenerPrecio () {

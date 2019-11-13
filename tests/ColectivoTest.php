@@ -85,17 +85,17 @@ class ColectivoTest extends TestCase {
             // Avanza 3 horas.
             $this->tiempoDePrueba->avanzar(10800);
             
-            $this->assertEquals(!($this->colectivoDePrueba->pagarCon($this->tarjetaDePrueba,$this->tiempoDePrueba),"Plus"));
+            $this->assertNotEquals($this->colectivoDePrueba->pagarCon($this->tarjetaDePrueba,$this->tiempoDePrueba),"Plus");
             
             // Avanza 3 horas.
             $this->tiempoDePrueba->avanzar(10800);
             
-            $this->assertEquals(!($this->colectivoDePrueba->pagarCon($this->tarjetaDePrueba,$this->tiempoDePrueba),"Plus"));
+            $this->assertNotEquals($this->colectivoDePrueba->pagarCon($this->tarjetaDePrueba,$this->tiempoDePrueba),"Plus");
             
             // Avanza 3 horas.
             $this->tiempoDePrueba->avanzar(10800);
             
-            $this->assertEquals(!($this->colectivoDePrueba->pagarCon($this->tarjetaDePrueba,$this->tiempoDePrueba),"No puede viajar"));
+            $this->assertNotEquals($this->colectivoDePrueba->pagarCon($this->tarjetaDePrueba,$this->tiempoDePrueba),"No puede viajar");
         
         // Prueba el medio boleto estudiantil.
             $this->tiempoDePrueba = New TiempoFalso(86400);

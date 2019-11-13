@@ -13,7 +13,8 @@ class MedioBoletoUniversitario extends Tarjeta {
     public $viajesDiarios = 0;
     public $ultimoDia = null;
 
-    public function __construct() {
+    public function __construct($saldo = 0) {
+        $this->saldo = $saldo;
         $this->constantes = new Constantes();
         $this->precio = $this->constantes->precioMedioBoletoUniversitario;
         $this->precioEntero = $this->constantes->precioBoletoUniversitario;

@@ -19,6 +19,24 @@ class TarjetaTest extends TestCase {
         $this->assertEquals($this->tarjetaDePrueba->obtenerSaldo(),$this->constantesDePrueba->cargasPosibles[0][0]);
         $this->assertTrue(!($this->tarjetaDePrueba->recargar(1)));
         $this->assertEquals($this->tarjetaDePrueba->obtenerSaldo(),$this->constantesDePrueba->cargasPosibles[0][0]);
+        
+        
+        $this->tarjetaDePrueba = New Tarjeta(0);
+        
+        $this->tarjetaDePrueba->aumentarPlus();
+        $this->tarjetaDePrueba->recargar($this->constantesDePrueba->cargasPosibles[0][0]);
+        
+        $this->assertEquals($this->tarjetaDePrueba->obtenerPlus(),1);
+        $this->assertEquals($this->tarjetaDePrueba->obtenerSaldo(),$this->constantesDePrueba->cargasPosibles[0][0]);
+        
+        
+        $this->tarjetaDePrueba = New Tarjeta(0);
+        
+        $this->tarjetaDePrueba->aumentarPlus();
+        $this->tarjetaDePrueba->recargar($this->constantesDePrueba->cargasPosibles[3][0]);
+        
+        $this->assertEquals($this->tarjetaDePrueba->obtenerPlus(),0);
+        $this->assertEquals($this->tarjetaDePrueba->obtenerSaldo(),($this->constantesDePrueba->cargasPosibles[3][0])-($this->constantesDePrueba->precioCompleto));
     }
     
     public function testSetPrecio () {

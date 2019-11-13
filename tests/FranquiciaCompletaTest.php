@@ -11,6 +11,9 @@ class FranquiciaCompletaTest extends TestCase {
      */
     public function testConstruct () {
         
-        $this->assertTrue(TRUE);
+        $this->tarjetaDePrueba = New FranquiciaCompleta();
+        $this->constantesDePrueba = New Constantes();
+        
+        $this->assertEquals($this->tarjetaDePrueba->obtenerPrecio(),$this->constantesDePrueba->precioLibre);
     }
 }
